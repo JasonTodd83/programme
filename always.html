@@ -1,0 +1,148 @@
+---
+layout: default
+---
+
+<style>
+  * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      text-decoration: none;
+      font-weight: 520;
+      font-family: 微软雅黑;
+  }
+
+  #nav {
+      width: 300px;
+      height: 72px;
+      background-color: rgb(247, 249, 250);
+      border-radius: 20px;
+      margin: 20px auto;
+  }
+  #nav>ul{list-style:none;}
+
+  li {
+            /* 去掉li前面的小圆点 */
+            list-style: none;
+        }
+
+  #nav>ul>li {
+      float: left;
+      width: 40px;
+      height: 72px;
+      text-align: center;
+  }
+
+  #nav>ul>li>a {
+      text-align: center;
+      line-height: 72px;
+      font-size: 20px;
+      color: black;
+  }
+
+  #nav>ul>li>a:hover {
+      color: orange;
+  }
+
+  ul>span {
+      float: left;
+      line-height: 72px;
+      color: rgb(225, 224, 224);
+      font-weight: 800;
+      font-size: 24px;
+  }
+
+  #nav>ul>li>.a1 {
+      color: #FF0036;
+  }
+
+  #nav>ul>li>.a2 {
+      color: rgb(101, 198, 58);
+  }
+</style>
+
+
+<div class="search-container">
+  <input type="text" id="search-input" placeholder="search blog posts..." style="width: 90%;
+    height: 35px;
+    color: #333;
+    background-color: rgba(227,231,236,.2);
+    line-height: 35px;
+    padding:0px 16px;
+    border: 1px solid #c0c0c0;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 17px;
+    outline: none;
+    box-sizing: border-box;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);">
+  <ul id="results-container"></ul>
+</div>
+
+<!--script src="https://unpkg.com/simple-jekyll-search/dest/simple-jekyll-search.min.js"></script-->
+<script src="{{ site.baseurl }}/js/simple-jekyll-search.min.js"></script>
+
+{% if site.posts.size == 0 %}
+  <h2>No post found</h2>
+{% endif %}
+
+<div class="posts">
+  {% for post in paginator.posts %}
+  {% unless post.draft %}
+    <article class="post">
+      <h1>
+        <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+      </h1>
+
+      <div clsss="meta">
+        <span class="date">
+          {{ post.date | date: "%Y-%m-%d" }}
+        </span>
+
+        <ul class="tag">
+          {% for tag in post.tags %}
+          <li>
+            <a href="{{ site.url }}{{ site.baseurl }}/tags#{{ tag }}">
+              {{ tag }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="entry">
+        {{ post.excerpt | truncate: 200 }}
+      </div>
+
+      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
+    </article>
+  {% endunless %}
+  {% endfor %}
+</div>
+
+<div class="pagination">
+  {% if paginator.previous_page %}
+    <span class="prev">
+      <a href="{{ site.baseurl }}{{ paginator.previous_page_path }}" class="prev">
+        ← 上一页
+      </a>
+    </span>
+  {% endif %}
+  {% if paginator.next_page %}
+    <span class="next">
+      <a href="{{ site.baseurl}}{{ paginator.next_page_path }}" class="next">
+        下一页 →
+      </a>
+    </span>
+  {% endif %}
+</div>
+
+<p>“我是一个十六岁的女孩，去参加舞会，我喜欢一个男孩，梦想跳一支慢舞，做着孩子气的梦，它有自己独特的甜蜜与美丽，我梦想我们住在一起，然后从爸爸妈妈手中接管农场。第二天醒来的时候，我并不知道我是怎么回家的，只是浑身散发着呕吐物的味道，鞋子也沾上了——为此我被大骂了一顿——一切都变了。昨夜去跳舞的那个女孩，她有一个心上人，可她死了；她被一个快四十岁的男人杀死在一辆汽车的后座上。我常常想，假如我没有被强奸，我的命运又会是怎样的？我会成为什么样的人？有时我会想，我还会再见到原来的我吗？还是她真的死了？被杀死在那辆该死的拉达车的后座上？”</p>
+
+<p>有传言说我很轻浮，很容易搞到手，不管我怎么解释都无济于事。他们当中有些人当然也虐待过我，对我做过可怕的事情。可我从没试过寻求帮助，直到一个周末，我和一个被我唤作男朋友的人一起在避暑别墅里过了两夜。他邀请了他的两个朋友同行，他们似乎把我看作某种可以随意使用的东西。当我带着醉意问其中一个人，能不能让我自己静一静，他仿佛很惊讶地回答，我和那么多男人都搞过，这种事对我来说不该有任何不同。</p>
+
+<p>它们正看着什么？
+列侬谱写的左眼，麦卡特尼谱写的右眼。</p>
+
+<p>我们去做智商测试，阿里的结果是一百三。不赖，我们自豪地说，仿佛被人授予了奖章或是证书，证明我们不只是平淡无奇的存在、单调的星期二和乏味的无名小卒。测智商很容易，也许这就是为什么大多数事情都要根据它进行评估。根据智力和分数进行评估；显而易见的事情。而要测量什么事情更重要、更有价值就困难得多：理解、敏感、道德。一个人的智商是一百三，但理解力只有十二。假如没有理解，智力又有什么用？我们看着卡里把她拉进他的拉达车，但什么也没弄懂。直到三十多年后，有人对我们清楚地阐明了事实。阿里站在窗前，透过几乎全黑的玻璃，他只看见了自己的影子。负罪感也会啮咬一个没有过错的人，一个什么都不懂的人。</p>
+
